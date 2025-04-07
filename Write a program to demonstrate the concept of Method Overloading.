@@ -1,0 +1,50 @@
+using System;
+
+namespace MethodOverridingExample
+{
+    // Base Class
+    class Animal
+    {
+        // Virtual method in the base class
+        public virtual void Speak()
+        {
+            Console.WriteLine("The animal makes a sound.");
+        }
+    }
+
+    // Derived Class
+    class Dog : Animal
+    {
+        // Overriding the base class method
+        public override void Speak()
+        {
+            Console.WriteLine("The dog barks.");
+        }
+    }
+
+    // Another Derived Class
+    class Cat : Animal
+    {
+        // Overriding the base class method
+        public override void Speak()
+        {
+            Console.WriteLine("The cat meows.");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create objects of derived classes
+            Animal myDog = new Dog();
+            Animal myCat = new Cat();
+
+            // Call the Speak method
+            myDog.Speak(); // Output: The dog barks.
+            myCat.Speak(); // Output: The cat meows.
+
+            Console.ReadLine();
+        }
+    }
+}
