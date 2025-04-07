@@ -1,0 +1,92 @@
+using System;
+
+class MatrixOperations
+{
+    static void Main()
+    {
+        Console.Write("Enter number of rows: ");
+        int rows = int.Parse(Console.ReadLine());
+        Console.Write("Enter number of columns: ");
+        int cols = int.Parse(Console.ReadLine());
+
+        int[,] matrix1 = new int[rows, cols];
+        int[,] matrix2 = new int[rows, cols];
+
+        Console.WriteLine("Enter elements of first matrix:");
+        ReadMatrix(matrix1);
+
+        Console.WriteLine("Enter elements of second matrix:");
+        ReadMatrix(matrix2);
+
+        Console.WriteLine("Matrix Addition:");
+        PrintMatrix(AddMatrices(matrix1, matrix2));
+
+        if (rows == cols) // Multiplication is only valid for square matrices
+        {
+            Console.WriteLine("Matrix Multiplication:");
+            PrintMatrix(MultiplyMatrices(matrix1, matrix2));
+        }
+        else
+        {
+            Console.WriteLine("Matrix multiplication is not possible for non-square matrices.");
+        }
+    }
+
+    static void ReadMatrix(int[,] matrix)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                Console.Write($"Element [{i},{j}]: ");
+                matrix[i, j] = int.Parse(Console.ReadLine());
+            }
+        }
+    }
+
+    static int[,] AddMatrices(int[,] matrix1, int[,] matrix2)
+    {
+        int rows = matrix1.GetLength(0);
+        int cols = matrix1.GetLength(1);
+        int[,] result = new int[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                result[i, j] = matrix1[i, j] + matrix2[i, j];
+            }
+        }
+        return result;
+    }
+
+    static int[,] MultiplyMatrices(int[,] matrix1, int[,] matrix2)
+    {
+        int size = matrix1.GetLength(0);
+        int[,] result = new int[size, size];
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+                    result[i, j] += matrix1[i, k] * matrix2[k, j];
+                }
+            }
+        }
+        return result;
+    }
+
+    static void PrintMatrix(int[,] matrix)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
