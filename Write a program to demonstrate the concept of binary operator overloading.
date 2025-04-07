@@ -1,0 +1,55 @@
+using System;
+
+namespace binary_overload
+{
+    class ComplexNumber
+    {
+        int x; // Real part
+        double y; // Imaginary part
+
+        public ComplexNumber(int real, double imaginary)
+        {
+            x = real;
+            y = imaginary;
+        }
+
+        public ComplexNumber()
+        {
+        }
+
+        // Overloading + operator
+        public static ComplexNumber operator +(ComplexNumber c1, ComplexNumber c2)
+        {
+            ComplexNumber c = new ComplexNumber();
+            c.x = c1.x + c2.x;  // Adding real parts
+            c.y = c1.y + c2.y;  // Adding imaginary parts
+            return c;
+        }
+
+        // Displaying complex number
+        public void Show()
+        {
+            Console.WriteLine($"{x} + j{y}");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ComplexNumber p, q, r;
+            p = new ComplexNumber(10, 2.0);
+            q = new ComplexNumber(20, 15.5);
+            r = p + q;
+
+            Console.Write("p = ");
+            p.Show();
+            Console.Write("q = ");
+            q.Show();
+            Console.Write("r = ");
+            r.Show();
+
+            Console.ReadLine();
+        }
+    }
+}
