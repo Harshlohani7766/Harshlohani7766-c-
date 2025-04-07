@@ -1,0 +1,33 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of terms for Fibonacci Series: ");
+        int terms;
+
+        // Validate input
+        while (!int.TryParse(Console.ReadLine(), out terms) || terms <= 0)
+        {
+            Console.Write("Please enter a valid positive integer: ");
+        }
+
+        Console.WriteLine("\nFibonacci Series:");
+        GenerateFibonacci(terms);
+    }
+
+    static void GenerateFibonacci(int n)
+    {
+        int first = 0, second = 1, next;
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write(first + " ");
+            next = first + second;
+            first = second;
+            second = next;
+        }
+        Console.WriteLine();
+    }
+}
