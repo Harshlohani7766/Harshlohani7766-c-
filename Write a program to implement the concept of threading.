@@ -1,0 +1,46 @@
+using System;
+using System.Threading; 
+
+namespace ConsoleApplication11 
+{ 
+    class Program 
+    { 
+        static Mutex m = new Mutex(); // Making Mutex static
+
+        public void m1() 
+        { 
+            m.WaitOne(); // Acquire Mutex
+            for (int i = 0; i <= 10; i++) 
+            { 
+                Console.WriteLine(i); 
+                Thread.Sleep(500); 
+            }
+            m.ReleaseMutex(); // Release Mutex
+        } 
+
+        public void m2() 
+        { 
+            m.WaitOne(); // Acquire Mutex
+            for (int k = 11; k <= 20; k++) 
+            { 
+                Console.WriteLine(k); 
+                Thread.Sleep(500); 
+            } 
+            m.ReleaseMutex(); // Release Mutex
+        } 
+    } 
+
+    class test 
+    { 
+        static void Main(string[] args) 
+        { 
+            Program p = new Program(); // Create a single instance of Program
+            
+            Thread t1 = new Thread(new ThreadStart(p.m1)); 
+            Thread t2 = new Thread(new ThreadStart(p.m2)); 
+
+            t1.Start(); 
+            t2.Start(); 
+        } 
+    } 
+}
